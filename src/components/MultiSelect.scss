@@ -1,0 +1,226 @@
+$radius: 18px;
+$chip-radius: 12px;
+$ring: #6da7ff;
+$ring-outer: rgba(109, 167, 255, 0.22);
+$border: #d7dbe6;
+$text: #2a3142;
+$muted: #8a93a8;
+$bg: #ffffff;
+$hover: #eef3ff;
+$selected: #eaf1ff;
+$shadow: 0 16px 36px rgba(32, 40, 62, 0.16);
+
+$fs-input: 16px;
+$fs-item: 15px;
+$fs-small: 12px;
+
+.ms {
+  position: relative;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: $text;
+
+  &__control {
+    display: flex;
+    align-items: center;
+    background: $bg;
+    border: 2px solid $border;
+    border-radius: $radius;
+    padding: 10px 14px;
+    min-height: 52px;
+    cursor: text;
+    transition: box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s;
+    &:hover {
+      border-color: darken($border, 6%);
+    }
+  }
+
+  &.is-open .ms__control,
+  .ms__control.is-focus {
+    border-color: $ring;
+    box-shadow: 0 0 0 4px $ring-outer;
+    background: #fcfdff;
+  }
+
+  &__chips {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: $selected;
+    border: 1px solid lighten($ring, 18%);
+    color: $text;
+    border-radius: $chip-radius;
+    padding: 6px 10px;
+    line-height: 1;
+    font-size: 14px;
+  }
+
+  &__chipLabel {
+    max-width: 180px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__chipRemove {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    color: $muted;
+    padding: 0;
+    margin-left: 2px;
+    &:hover {
+      color: darken($muted, 14%);
+    }
+  }
+
+  &__input {
+    border: 0;
+    outline: none;
+    min-width: 110px;
+    flex: 1;
+    font-size: $fs-input;
+    padding: 4px 2px;
+    background: transparent;
+
+    &::placeholder {
+      color: $muted;
+    }
+
+    -webkit-appearance: none;
+    appearance: none;
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-decoration,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      display: none;
+    }
+    &::-ms-clear,
+    &::-ms-reveal {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+  }
+
+  &__arrow {
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 0;
+    color: $muted;
+  }
+  &__arrow::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.18s ease;
+  }
+  &.is-open .ms__arrow::before {
+    transform: rotate(-135deg);
+  }
+
+  &__menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: $bg;
+    border: 1px solid $border;
+    border-radius: $radius;
+    box-shadow: $shadow;
+    overflow: hidden;
+    z-index: 20;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 8px;
+    max-height: 320px;
+    overflow: auto;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: $fs-item;
+    cursor: pointer;
+    color: $text;
+    transition: background 0.12s ease, color 0.12s ease;
+
+    &:hover,
+    &.is-active {
+      background: $hover;
+    }
+
+    &.is-disabled {
+      color: $muted;
+      cursor: not-allowed;
+      background: transparent;
+    }
+  }
+
+  &__itemMain {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+  &__icon {
+    font-size: 18px;
+    line-height: 1;
+  }
+  &__label {
+    flex: 1;
+  }
+
+  &__check {
+    margin-left: auto;
+    font-size: 15px;
+    color: #4a79ff;
+    font-weight: 700;
+  }
+
+  &__create .ms__label {
+    font-weight: 600;
+  }
+
+  &__empty {
+    padding: 14px;
+    text-align: center;
+    color: $muted;
+    font-size: $fs-small;
+  }
+}
+
+input[type="search"].ms__input {
+  -webkit-appearance: none;
+  appearance: none;
+}
